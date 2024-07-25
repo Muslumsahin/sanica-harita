@@ -6,8 +6,10 @@ use App\Http\Controllers\IllerController;
 
 
 
-Route::get('/bayi-ekle',[BayiController::class, 'index']);
-    
+
+
+Route::get('/bayi-ekle', [BayiController::class, 'index'])->name('bayi.create');
+Route::post('/bayi-ekle', [BayiController::class, 'store'])->name('bayi.store');
 
 
 Route::get('/', [IllerController::class , 'index']);

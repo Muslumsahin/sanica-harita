@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Iller extends Model
 {
+    protected $table= 'illers';
     protected $guarded = [];
     use HasFactory;
 

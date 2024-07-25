@@ -76,31 +76,19 @@
     </header>
     <div class="container">
         <div class="col-6 mx-auto">
-            <form class="mt-3">
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Bayi Adı</label>
-                    <input type="text" class="form-control" id="bayi_adi" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Bayi Adresi</label>
-                    <input type="text" class="form-control" id="bayi_adi" aria-describedby="emailHelp">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Bulunduğu il</label>
-                    @foreach ($iller as $il)
-                        <select class="form-select " aria-label="Default select example">
-                            <option selected>il seçiniz</option>
-                            <option name="" id="{{ $il->il_id }}">{{ $il->il_ismi }}</option>
-                        </select>
+            <form action="{{ route('bayi.store') }}" method="POST">
+                @csrf
+                <label for="firmaismi">Firma İsmi:</label>
+                <input type="text" id="firmaismi" name="firmaismi" required>
+                <br>
+                <label for="il">Şehir:</label>
+                <select id="il" name="il_id" required>
+                    @foreach($iller as $il)
+                        <option value="{{ $il->id }}">{{ $il->il_ismi }}</option>
                     @endforeach
-                </div>
-                <div class="mb-3 form-check">
-                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                </select>
+                <br>
+                <button type="submit">Bayi Ekle</button>
             </form>
         </div>
     </div>
