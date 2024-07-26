@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sanica Haritası</title>
 
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
@@ -16,7 +17,7 @@
         }
 
         #map {
-            width: 1050px;
+            width: 100%;
             height: 620px;
             position: relative;
             margin: auto;
@@ -62,33 +63,32 @@
         <div class="header-navbar">
             <div class="container-fluid">
                 <div class="row">
-
                     <div class="col-9 nav pt-4 ps-5">
                         <img class="logo" src="./img/sanica_logo.png" alt="">
-
                     </div>
-                    <a class="col-3 pt-4 ps-5 text-white contact">
-                        iletişim
-                    </a>
                 </div>
             </div>
         </div>
     </header>
     <div class="container">
-        <div class="col-6 mx-auto">
+        <div class=" col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mt-3">
             <form action="{{ route('bayi.store') }}" method="POST">
                 @csrf
-                <label for="firmaismi">Firma İsmi:</label>
-                <input type="text" id="firmaismi" name="firmaismi" required>
+                <div class="mb-3">
+                    <label for="firmaismi" class="form-label">Firma İsmi</label>
+                    <input type="text" class="form-control" id="firmaismi" name="firmaismi" required>
+                </div>
                 <br>
+                <div class="mb-3">
                 <label for="il">Şehir:</label>
-                <select id="il" name="il_id" required>
-                    @foreach($iller as $il)
+                <select id="il" name="il_id" class="form-select" aria-label="Default select example" required>
+                    @foreach ($iller as $il)
                         <option value="{{ $il->id }}">{{ $il->il_ismi }}</option>
                     @endforeach
                 </select>
                 <br>
-                <button type="submit">Bayi Ekle</button>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Bayi Ekle</button>
             </form>
         </div>
     </div>
