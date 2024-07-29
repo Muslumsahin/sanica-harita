@@ -64,7 +64,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-9 nav pt-4 ps-5">
-                        <img class="logo" src="./img/sanica_logo.png" alt="">
+                        <a href="{{ route('home') }}">
+                            <img class="logo" src="./img/sanica_logo.png" alt="">
+                        </a>
                     </div>
                 </div>
             </div>
@@ -78,15 +80,36 @@
                     <label for="firmaismi" class="form-label">Firma İsmi</label>
                     <input type="text" class="form-control" id="firmaismi" name="firmaismi" required>
                 </div>
+                <div class="mb-3">
+                    <label for="baglioldugubayi" class="form-label">Baglı olduğu Bayi</label>
+                    <input type="text" class="form-control" id="baglioldugubayi" name="baglioldugubayi" required>
+                </div>
+                <div class="mb-3">
+                    <label for="firmaadresi" class="form-label">Firma Adresi</label>
+                    <input type="text" class="form-control" id="firmaadresi" name="firmaadresi" required>
+                </div>
+                <div class="mb-3">
+                    <label for="firmatelefon" class="form-label">Firma Telefon</label>
+                    <input type="text" class="form-control" id="firmatelefon" name="firmatelefon" required>
+                </div>
+                <div class="mb-3">
+                    <label for="tabelaolcu" class="form-label">Tabela Ölçüsü</label>
+                    <input type="text" class="form-control" id="tabelaolcu" name="tabelaolcu" required>
+                </div>
+                <div class="mb-3">
+                    <label for="not" class="form-label">Not</label>
+                    <input type="textarea" class="form-control" id="not" name="not" required>
+                </div>
                 <br>
                 <div class="mb-3">
-                <label for="il">Şehir:</label>
-                <select id="il" name="il_id" class="form-select" aria-label="Default select example" required>
-                    @foreach ($iller as $il)
-                        <option value="{{ $il->id }}">{{ $il->il_ismi }}</option>
-                    @endforeach
-                </select>
-                <br>
+                    <label for="il">Şehir:</label>
+                    <select id="il" name="il_id" class="form-select" aria-label="Default select example"
+                        required>
+                        @foreach ($iller as $il)
+                            <option value="{{ $il->id }}">{{ $il->il_ismi }}</option>
+                        @endforeach
+                    </select>
+                    <br>
                 </div>
                 <button type="submit" class="btn btn-primary mb-3">Bayi Ekle</button>
             </form>

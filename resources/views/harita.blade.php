@@ -36,6 +36,7 @@
             });
         })
     </script>
+
     <style type="text/css">
         body {
             background: #fff;
@@ -51,11 +52,11 @@
             }
         }
 
-		@media screen and (min-width: 768px) {
-			#map_option{
-				display: none;
-			}
-		}
+        @media screen and (min-width: 768px) {
+            #map_option {
+                display: none;
+            }
+        }
 
         #map {
             width: 1050px;
@@ -130,35 +131,62 @@
             </div>
         </div>
     </div>
-
+    <div style="display: flex; justify-content:center;">
+        <a type="button" class="btn btn-primary" href="{{ route('bayi.create') }}">Bayi ekle</a>
+    </div>
     <div class="container" id="bayi-tablo">
-        <table class="table">
+        <table class="table" id="bayiler-tablosu">
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th scope="col">Firma İsmi</th>
+                    <th scope="col">Üst Bayi</th>
+                    <th scope="col">Adres</th>
+                    <th scope="col">Telefon</th>
+                    <th scope="col">Not</th>
                 </tr>
             </thead>
-            <tbody>
-                @foreach ($iller as $il)
-                    <tr>
-                        <th scope="row">{{ $il->id }}</th>
-                        <td>{{ $il->il_ismi }}</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                @endforeach
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                </tr>
+            <tbody id="data-table-body">
+                <!-- Bayiler buraya eklenecek -->
             </tbody>
         </table>
     </div>
+    <script>
+        $(document).ready(function() {
+            // AJAX ile verileri çek
+            function fetchBayiler(ilId) {
+                $.ajax({
+                    url: '/get-bayiler/' + ilId, // Endpoint ile şehir ID'sini kullan
+                    method: 'GET',
+                    success: function(data) {
+                        $('#data-table-body').empty(); // Mevcut verileri temizle
+                        data.forEach(function(item) {
+                            $('#data-table-body').append(
+                                '<tr>' +
+                                '<td>' + item.id + '</td>' +
+                                '<td>' + item.firmaismi + '</td>' +
+                                '<td>' + item.baglioldugubayi + '</td>' +
+                                '<td>' + item.firmaadresi + '</td>' +
+                                '<td>' + item.firmatelefon + '</td>' +
+                                '<td>' + item.not + '</td>' +
+                                '</tr>'
+                            );
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('AJAX Error:', status, error);
+                    }
+                });
+            }
+
+            // Haritada şehir tıklama işlevi
+            $('#map').on('click', 'path', function() {
+                var ilId = $(this).data('id'); // SVG öğesinin data-id özelliğini al
+                fetchBayiler(ilId); // Seçilen şehir ID'si ile verileri çek
+            });
+
+        });
+    </script>
 </body>
 
 </html>
